@@ -15,7 +15,7 @@ User: Citizens, policy makers, environmental groups;
 
 Function: To Map historical data in an interactive visual manner
 
-Key Result: A interactive map of Seattle that allows the user to look at Census Tracks for the city of Seattle over different years. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
+Key Result: A interactive map of Seattle that allows the user to look at Trafic flow patterns for cenus tracts within the city of Seattle over different years. This interactive map allows the user to view Chlorpleth Maps, which show traffic volume in geographic regions. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
 
 ### 2. Expressing future predictions for Seattle Traffic flow:
 Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Team. 
