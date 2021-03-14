@@ -5,3 +5,5 @@ github_username:  Greening-Seattle
 
 # Build settings
 markdown: kramdown
+
+theme: jekyll-theme-cayman
