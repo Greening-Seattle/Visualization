@@ -1,4 +1,4 @@
-# Visualization (Team Members: Sarah Pristash, Wenqi Cui and Shaun Gallagher)
+# Green Seattle-Visualization<br /> (Team Members: Sarah Pristash, Wenqi Cui and Shaun Gallagher)
 
 The goal of this project is traffic visualization for the city of Seattle. There is a large quantity of publicly available data, including information about Average Annual Daily Traffic (AADT) and a specific GeoBaseID which expresses the location of these traffic counts in geospatial coordinates. These data are provided by the city and state governments on a yearly basis. This dataset can be used to better understand trends in traffic flow. In particular, the Greening Seattle Team wants to vizualize traffic trends at different levels of granularity, on both the Street and Census Track level. Data has been collected and cleaned in the Greening Seattle Shared Repository. This repository takes these data, in geoPandas data frames and visualizes them using Follium. The visualization of Seattle Traffic Data is intended to ultimately examine the impact of population growth on yearly traffic, and examine how urban planning strategies like construction of bike lanes, parking spaces or bike racks affect traffic flow in a specific area.   
 
@@ -42,6 +42,11 @@ Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Te
 
 
 ## Screenshots:
+
+## Code References
+We thank the following references for providing open-sorce data
+- Traffic data
+- Electrical Vehicel: https://github.com/armiro/crawlers/tree/master/SpritMonitor-Crawler
 
 ## License:
 An open source MIT License for the project repository.
