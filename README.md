@@ -11,35 +11,39 @@ The goal of this project is traffic visualization for the city of Seattle. There
 This project is intended to provide visual insight into Seattle's traffic patterns by examining key regions and exploring traffic changes over time. This project also includes generalizable methods for visualizing the traffic paterns of other cities beyond Seattle. As such these outputs can be useful to a wide audience. There are two key Use Cases for this project.  
 
 ### 1. Traffic visualization for informed urban planning:   
-User: Citizens, policy makers, environmental groups; 
+- User: Citizens, policy makers, environmental groups; 
 
-Function: To Map historical data in an interactive visual manner
+- Function: To Map historical data in an interactive visual manner
 
-Key Result: A interactive map of Seattle that allows the user to look at Trafic flow patterns for cenus tracts within the city of Seattle over different years. This interactive map allows the user to view Chlorpleth Maps, which show traffic volume in geographic regions. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
+- Key Result: A interactive map of Seattle that allows the user to look at Trafic flow patterns for cenus tracts within the city of Seattle over different years. This interactive map allows the user to view Chlorpleth Maps, which show traffic volume in geographic regions. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
 
 ### 2. Expressing future predictions for Seattle Traffic flow:
 Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Team. 
 
-User: Citizens, policy makers, environmental groups; provide region of interest
-Function: Map predicted traffic/emissions reductions based on our predictive model
-Results:A  Map of predictions that can be varied with time
+- User: Citizens, policy makers, environmental groups; provide region of interest
+- Function: Map predicted traffic/emissions reductions based on our predictive model
+- Results:A  Map of predictions that can be varied with time
 
 
 ## Key files within the Repository:
 
-- License: An open source MIT License for the project repository.
+- Chloropleth Map: A map of Seattle traffic flow for 2015 which has a color scale for traffic volume plotted against different census tracks.
 
--Chloropleth Map: A map of Seattle traffic flow for 2015 which has a color scale for traffic volume plotted against different census tracks.
+- Map Building: A jupyter example notebook that contains instructions on building a chlorpleth map. 
 
--Map Building: A jupyter example notebook that contains instructions on building a chlorpleth map. 
-
--Documentation Folder: Contains use cases and component specification files.
+- Documentation Folder: Contains use cases and component specification files.
  
 
-  
+ ## Key files within the Repository:
+ 
 
 
 
 
 
 ## Screenshots:
+
+## License:
+An open source MIT License for the project repository.
+
+
