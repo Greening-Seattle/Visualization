@@ -29,19 +29,19 @@ Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Te
 
 - Chloropleth Map: A map of Seattle traffic flow for 2015 which has a color scale for traffic volume plotted against different census tracks.
 
-- Map Building: A jupyter example notebook that contains instructions on building a chlorpleth map. 
+- Map Building: An example jupyter notebook that contains instructions on building a chlorpleth map. 
 
 - Documentation Folder: Contains use cases and component specification files.
-
+-The process for data cleaning can be viewed on the Shared Repository and Prediction Repository for the Greening Seattle Organization. 
 
 ## Links to Key Visualization:
 
 [Use case graphic](brendanbutler.github.com/Greening-Seattle/Prediction/img/Slide1.jpg)
 
 ## Code References
-We thank the following references for providing open-sorce data
-- Traffic data
-- Electrical Vehicel: https://github.com/armiro/crawlers/tree/master/SpritMonitor-Crawler
+We thank the following references for providing open-source data
+- City of Seattle Public Data https://data.seattle.gov/
+- Electric Vehicle: https://github.com/armiro/crawlers/tree/master/SpritMonitor-Crawler
 
 ## License:
 An open source MIT License for the project repository.
