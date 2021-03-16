@@ -2,7 +2,10 @@
 
 The goal of this project is traffic visualization for the city of Seattle. There is a large quantity of publicly available data, including information about Average Annual Daily Traffic (AADT) and a specific GeoBaseID which expresses the location of these traffic counts in geospatial coordinates. These data are provided by the city and state governments on a yearly basis. This dataset can be used to better understand trends in traffic flow. In particular, the Greening Seattle Team wants to vizualize traffic trends at different levels of granularity, on both the Street and Census Track level. Data has been collected and cleaned in the Greening Seattle Shared Repository. This repository takes these data, in geoPandas data frames and visualizes them using Follium. The visualization of Seattle Traffic Data is intended to ultimately examine the impact of population growth on yearly traffic, and examine how urban planning strategies like construction of bike lanes, parking spaces or bike racks affect traffic flow in a specific area.   
 
-- The public datasets from the city of Seattle that are being visualized include Bike Lanes, Bike Racks, population and traffic flow. All of these data have been aggregated by census tract. 
+- The public datasets from the city of Seattle that are being visualized include Bike Lanes, Bike Racks, population, population fraction and traffic flow. All of these data have been aggregated by zip code.
+
+- Zip codes were chosen as the geographic level to examine because it exists as an intermediate level, minimizing the tradeoff between minimal features in smaller regions and inability to see broader trends in the data sets with  city-wide view. 
+ 
 - The primary intended users are Seattle Residents or local officials who want to understand and predict the effects of population growth and local transit infrastructure on traffic flow.[Use case graphic](brendanbutler.github.com/Greening-Seattle/Prediction/img/Slide1.jpg)
 
 
