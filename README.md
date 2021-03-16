@@ -93,6 +93,7 @@ Example of Demo Interactive Chloropleth Map:
 |   |   Predict_Visualize_Traffic_MultiFeature.ipynb
 |   |   Predict_power_comsumption_v2.ipynb
 |   |   volkswagen_e_golf.csv
+|   |   all_data.csv
 |   |
 +---greening_vis 
 |   +---tests
