@@ -14,7 +14,7 @@ This project is intended to provide visual insight into Seattle's traffic patter
    
 - User: Citizens, policy makers, environmental groups; 
 
-- Function: To map historical data in an interactive visual manner
+- Function: To map historical data in an interactive visual manner. The key component here is 'plotting_functions.py' which can generate map data.
 
 - Key Result: An interactive map of Seattle that allows the user to look at Trafic flow patterns on a per year basis by zipcode. This interactive map allows the user to view Chlorpleth Maps, which show traffic volume in geographic regions. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
 
@@ -25,7 +25,7 @@ Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Te
 
 - Function: Map predicted traffic/emissions reductions based on our predictive model
 
-- Results: A Map of predictions that can be varied with time
+- Results: A Map of predictions that can be varied with time. This output was demonstrated for the in class presentation.
 
 ### 3. Framework for Visualizing the training of neural network for prediction:
 Visualize the Traning Process of Machine Learning Model from Tensorboard 
@@ -56,12 +56,40 @@ Visualize the Traning Process of Machine Learning Model from Tensorboard
 
 - Model Visualization/ Framework for Dense Neural Network visualization based on a sample electric car dataset. This publicly available data can be used to set up visualization in Tensor Board, while the data is being cleaned. This Model was then adapted to the actual training data set.   
 
-## Links to Key Visualization:
+## Repository Architecture:
 
-[Use case graphic](brendanbutler.github.com/Greening-Seattle/Prediction/img/Slide1.jpg)
+```
+|   README.md
+|   LICENSE
+|   .travis.yml
+|   .gitignore
+|   _config.yml
+|   index.md 
++---Documentation
+|   |   Use_Cases.md
+|   |   Components.md
++---Model Visualization 
+|   |   Predict_Visualize_Traffic_MultiFeature.ipynb
+|   |   Predict_power_comsumption_v2.ipynb
+|   |   volkswagen_e_golf.csv
+|   |
++---greening_vis 
+|   +---tests
+|   |   __init__.py
+|   |   plotting_functions.py
++---map_html
+|   |   choropleth_map.html
+|   |   choropleth_mapv2.html
+|   |   choropleth_mapv3.html
++---source
+|   |    Map building.ipynb
+|   |    Mapping_function_test.ipynb
+|   |    SG Tests_get gdf.ipynb
+```
 
 ## Code References
 We thank the following references for providing open-source data
+
 - City of Seattle Public Data https://data.seattle.gov/
 - Electric Vehicle: https://github.com/armiro/crawlers/tree/master/SpritMonitor-Crawler
 
