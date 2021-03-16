@@ -180,6 +180,8 @@ def plot_traffic_data_over_time():
     zips_years = city_by_zip.dissolve(by=['YEAR','ZIPCODE'], aggfunc=sum)
     zips_years.reset_index(inplace=True)
     
+    # TimeSliderChoropleth example found here:
+    # https://www.analyticsvidhya.com/blog/2020/06/guide-geospatial-analysis-folium-python/
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
     zips_years['ModifiedDateTime'] = pd.Series(pd.to_numeric(zips_years['YEAR'], errors='coerce'), dtype='int64')
