@@ -79,8 +79,8 @@ def get_census_bounds():
     census_bounds_cleaned = census_bounds.loc[:, census_columns]
     # We change the cenus tract name to an integer for manipulation later.
     census_bounds_cleaned['NAME10'] = \
-                                    census_bounds_cleaned['NAME10'
-                                   ].astype(float)
+                          census_bounds_cleaned['NAME10'
+                         ].astype(float)
     return census_bounds_cleaned
 
 
@@ -135,10 +135,10 @@ def plot_zip_traffic_data(year):
     # Stackoverflow question that helped create the tooltips:
     # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium
     # Create a Map instance
-    m = folium.Map(location=[47.65, -122.3], \
-                                              tiles='cartodbpositron',
-                                              zoom_start=10,
-                                              control_scale=True)
+    m = folium.Map(location=[47.65, -122.3],
+                   tiles='cartodbpositron',
+                   zoom_start=10,
+                   control_scale=True)
 
     # Plot a choropleth map
     # Notice: 'geoid' column that we created earlier needs
@@ -160,19 +160,19 @@ def plot_zip_traffic_data(year):
 
     # Convert points to GeoJson
     folium.features.GeoJson(traffic_zones,
-        name='Labels', style_function=lambda x: \
-                                                {'color': 'transparent',
-                                                 'fillColor': 'transparent',
-                                                 'weight': 0},
+        name='Labels', style_function=lambda x:
+                      {'color': 'transparent',
+                       'fillColor': 'transparent',
+                       'weight': 0},
         tooltip=folium.features.GeoJsonTooltip(
-                                               fields=['ZIPCODE', 'AAWDT'],
-                                               aliases=['Zipcode', 
-                                                        'Traffic Count'],
-                                               labels=True,
-                                               sticky=False)
-                                                             ).add_to(m)
+                                                fields=['ZIPCODE', 'AAWDT'],
+                                                aliases=['Zipcode',
+                                                         'Traffic Count'],
+                                                labels=True,
+                                                sticky=False)
+                                               ).add_to(m)
 
-        # Show map
+    # Show map
     m
 
     return m
@@ -205,7 +205,7 @@ def plot_traffic_data_over_time():
     city_by_zip.reset_index(inplace=True)
     # Select only the necessary columns
     city_by_zip = city_by_zip[['GEOBASID',
-        'ZIPCODE', 'YEAR', 'AAWDT', 'geometry']]
+                               'ZIPCODE', 'YEAR', 'AAWDT', 'geometry']]
     # Dissolve data by zipcode and year to
     # aggregate data within geographic area
     # and keep year info.
@@ -217,8 +217,10 @@ def plot_traffic_data_over_time():
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
     zips_years['ModifiedDateTime'] = \
-    pd.Series(pd.to_numeric(zips_years['YEAR'],
-        errors='coerce'), dtype='int64')
+                                   pd.Series(
+                                             pd.to_numeric(zips_years['YEAR'],
+                                                           errors='coerce'),
+                                                           dtype='int64')
     zips_years.ModifiedDateTime.fillna(0)
     zips_years['ModifiedDateTime'] = zips_years['ModifiedDateTime']*1e4+101
     zips_years['ModifiedDateTime'] = \
@@ -229,10 +231,13 @@ def plot_traffic_data_over_time():
     # Create bins for choropleth scale
     bins = np.linspace(min(zips_years['AAWDT']), max(zips_years['AAWDT']), 11)
     # Create color column for AAWDT data based on RdYlBu_r hex keys
-    zips_years['color'] = zips_years['AAWDT'] = pd.cut(zips_years['AAWDT'],
-        bins, labels=['#313695', '4575b4', '#74add1', '#abd9e9',
-          '#e0f3f8', '#ffffbf', '#fee090',
-          '#fdae61', '#f46d43', 'a50026'], include_lowest=True)
+    color_list = ['#313695', '4575b4', '#74add1', '#abd9e9',
+                  '#e0f3f8', '#ffffbf', '#fee090',
+                  '#fdae61', '#f46d43', 'a50026']
+    zips_years['color'] = zips_years['AAWDT'] = 
+                                              pd.cut(zips_years['AAWDT'], 
+                                                     bins, labels=[color_list],
+                                                     include_lowest=True)
     # Select relevant columns
     zips_years = zips_years[['ModifiedDateTime',
       'ZIPCODE', 'AAWDT', 'color', 'geometry']]
