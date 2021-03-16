@@ -12,8 +12,7 @@ def test_plot_zip_traffic_data(year):
     gdf_year = get_gdf(year)
     year_test = gdf_year['YEAR'].unique().astype(int)[0]
 
-    assert year_dict.get(year) == year_test,
-    'Function downloaded incorrect year data'
+    assert year_dict.get(year) == year_test, 'Function downloaded incorrect year data'
     return
 
 
