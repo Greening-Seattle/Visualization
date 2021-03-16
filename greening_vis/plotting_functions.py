@@ -16,13 +16,13 @@ url_list = [
  'https://opendata.arcgis.com/datasets/170b764c52f34c9497720c0463f3b58b_9.geojson',
  'https://opendata.arcgis.com/datasets/2c37babc94d64bbb938a9b520bc5538c_10.geojson',
  'https://opendata.arcgis.com/datasets/a35aa9249110472ba2c69cc574eff984_11.geojson']
-            
+
+
 def get_gdf(year):
-        '''Enter the desired year to download the traffic flow count
-        data for that year. Example: enter '7' for the year 2007.
-        '''
-        
-        
+    '''Enter the desired year to download the traffic flow count
+    data for that year. Example: enter '7' for the year 2007.
+    '''
+    
     # Pulls the data from Seattle's open GIS.
     num = year-7
     gdf_year = gpd.read_file(url_list[num])
