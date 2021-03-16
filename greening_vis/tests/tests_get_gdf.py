@@ -1,8 +1,3 @@
-from plotting_functions import get_gdf
-
-gdf_year = get_gdf(year)
-
-
 def year_type(year):
     """
     This function checks that the
@@ -26,4 +21,3 @@ def year_check(year):
     else:
         raise Exception('ValueError', 'gdf_year input not between 7 and 18')
     return
-

@@ -216,9 +216,9 @@ def plot_traffic_data_over_time():
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
     zips_years['ModifiedDateTime'] = pd.Series(
-            pd.to_numeric(zips_years['YEAR'], errors='coerce'),
-                                              dtype='int64'
-                                              )
+            pd.to_numeric(
+                    zips_years['YEAR'], errors='coerce'
+                    ), dtype='int64')
     zips_years.ModifiedDateTime.fillna(0)
     zips_years['ModifiedDateTime'] = zips_years['ModifiedDateTime']*1e4+101
     zips_years['ModifiedDateTime'] = pd.to_datetime(
@@ -232,16 +232,16 @@ def plot_traffic_data_over_time():
     color_list = ['#313695', '4575b4', '#74add1', '#abd9e9',
                   '#e0f3f8', '#ffffbf', '#fee090',
                   '#fdae61', '#f46d43', 'a50026']
-    zips_years['color'] = zips_years['AAWDT'] = 
-                                              pd.cut(zips_years['AAWDT'],
-                                                    bins, labels=[color_list],
-                                                    include_lowest=True)
+    zips_years['color'] = zips_years['AAWDT']=pd.cut(
+            zips_years['AAWDT'], bins, labels=[color_list],include_lowest=True
+            )
     # Select relevant columns
     zips_years = zips_years[['ModifiedDateTime',
-      'ZIPCODE', 'AAWDT', 'color', 'geometry']]
+                             'ZIPCODE', 'AAWDT', 'color', 'geometry']]
     # Convert time to ms format needed for TimeSliderChoropleth
     zips_years['ModifiedDateTime'] = (
-            zips_years['ModifiedDateTime'].astype(int) // 10**9).astype('U10')
+            zips_years['ModifiedDateTime'].astype(int) // 10**9
+            ).astype('U10')
     # Make zipcodes a str for the map
     zips_years['ZIPCODE'] = zips_years['ZIPCODE'].astype(str)
     # Create a style dictionary for the map
