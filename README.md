@@ -10,26 +10,31 @@ The goal of this project is traffic visualization for the city of Seattle. There
 
 This project is intended to provide visual insight into Seattle's traffic patterns by examining key regions and exploring traffic changes over time. This project also includes generalizable methods for visualizing the traffic paterns of other cities beyond Seattle. As such these outputs can be useful to a wide audience. There are two key Use Cases for this project.  
 
-### 1. Traffic visualization for informed urban planning:   
+### 1. Traffic visualization for informed urban planning:
+   
 - User: Citizens, policy makers, environmental groups; 
 
-- Function: To Map historical data in an interactive visual manner
+- Function: To map historical data in an interactive visual manner
 
-- Key Result: A interactive map of Seattle that allows the user to look at Trafic flow patterns on a per year basis by zipcode. This interactive map allows the user to view Chlorpleth Maps, which show traffic volume in geographic regions. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
+- Key Result: An interactive map of Seattle that allows the user to look at Trafic flow patterns on a per year basis by zipcode. This interactive map allows the user to view Chlorpleth Maps, which show traffic volume in geographic regions. Other key figure outputs are included within the repository as HTML files as well as being included below as "Screenshots."   
 
 ### 2. Expressing future predictions for Seattle Traffic flow:
 Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Team. 
 
 - User: Citizens, policy makers, environmental groups; provide region of interest
+
 - Function: Map predicted traffic/emissions reductions based on our predictive model
+
 - Results: A Map of predictions that can be varied with time
 
 ### 3. Framework for Visualizing the training of neural network for prediction:
 Visualize the Traning Process of Machine Learning Model from Tensorboard 
 
 - User: Policy makers  or researchers who train an neural network for prediction
+
 - Function: Train a neural network for predicting the traffic data based on the input features
-- Results: Tensorboard for visualzing the training process, the neural network for prediction
+
+- Results: Tensorboard for visualzing the training process, the neural network for prediction. After the prediction group trains the model and predicts traffic flow the visualization team will contextualize these model outputs.
 
 ## Key files within the Repository:
 
@@ -38,7 +43,8 @@ Visualize the Traning Process of Machine Learning Model from Tensorboard
 - Map Building: An example jupyter notebook that contains instructions on building a chlorpleth map. 
 
 - Documentation Folder: Contains use cases and component specification files.
--The process for data cleaning can be viewed on the Shared Repository and Prediction Repository for the Greening Seattle Organization. 
+
+- The process for data cleaning can be viewed on the Shared Repository and Prediction Repository for the Greening Seattle Organization. 
 
 ## Links to Key Visualization:
 
