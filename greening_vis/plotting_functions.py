@@ -2,7 +2,6 @@ import folium
 import geopandas as gpd
 import numpy as np
 import pandas as pd
-import requests
 url_list = [
  'https://opendata.arcgis.com/datasets/7015d5d46a284f94ac05c2ea4358bcd7_0.geojson',
  'https://opendata.arcgis.com/datasets/5fc63b2a48474100b560a7d98b5097d7_1.geojson',
@@ -22,7 +21,7 @@ def get_gdf(year):
     '''Enter the desired year to download the traffic flow count
     data for that year. Example: enter '7' for the year 2007.
     '''
-    
+
     # Pulls the data from Seattle's open GIS.
     num = year-7
     gdf_year = gpd.read_file(url_list[num])
@@ -35,8 +34,8 @@ def get_gdf(year):
     if year == 12:
         gdf_year = gdf_year.rename(columns={'STDY_YEAR': 'YEAR'})
     if year == 15 or year == 16:
-        gdf_year = gdf_year.rename(columns={"COUNTAAWDT": 'AAWDT', \
-            "FLOWSEGID": "GEOBASID", 'FIRST_STNAME_ORD': 'STNAME'})
+        gdf_year = gdf_year.rename(columns={"COUNTAAWDT": 'AAWDT', 
+                            "FLOWSEGID": "GEOBASID", 'FIRST_STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID', 'STNAME',
             'SHAPE_Length', 'geometry']]
         if year == 15:
@@ -46,7 +45,7 @@ def get_gdf(year):
             year_list = [2016]*len(gdf_year)
             gdf_year['YEAR'] = year_list
     elif year == 17 or year == 18:
-        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', "FLOWSEGID": \
+        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', "FLOWSEGID": 
             "GEOBASID", 'STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID', 
             'STNAME', 'SHAPE_Length', 'geometry']]
@@ -81,7 +80,7 @@ def get_census_bounds():
 
 
 def get_zipcode_bounds():
-    ''' Downloads boundaries of zipcodes for the city of Seattle. 
+    ''' Downloads boundaries of zipcodes for the city of Seattle.
     Data comes from Seattle's open GIS data.'''
     # First, we download the data from Seattle's open GIS.
     zipcodes_url = 'https://opendata.arcgis.com/datasets/83fc2e72903343aabff6de8cb445b81c_2.geojson'
@@ -98,7 +97,7 @@ def get_zipcode_bounds():
     zips = gpd.sjoin(zipcodes_cleaned, census_bounds_cleaned, op='intersects')
     zips_columns = ['ZIPCODE', 'NAME10', 'SHAPE_Area_left', 'geometry']
     zips = zips[zips_columns]
-    # Finally, we dissolve the data by Zipcode to 
+    # Finally, we dissolve the data by Zipcode to
     # ensure one area for each zipcode.
     zips = zips.dissolve(by='ZIPCODE')
     return zips
@@ -116,7 +115,7 @@ def plot_zip_traffic_data(year):
     # A spatial join of the traffic data with the
     # zipcodes assigns each street to its respective
     # zip code. Then, we dissolve this data set by
-    # zipcode so that each zipcode is one row with 
+    # zipcode so that each zipcode is one row with
     # the cumulative traffic count associated with it.
     # We also convert the data to a json for the
     # map feature.
@@ -131,7 +130,7 @@ def plot_zip_traffic_data(year):
     # Stackoverflow question that helped create the tooltips:
     # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium
     # Create a Map instance
-    m = folium.Map(location=[47.65, -122.3], tiles='cartodbpositron', \
+    m = folium.Map(location=[47.65, -122.3], tiles='cartodbpositron', 
         zoom_start=10, control_scale=True)
 
     # Plot a choropleth map
@@ -155,67 +154,78 @@ def plot_zip_traffic_data(year):
     # Convert points to GeoJson
     folium.features.GeoJson(traffic_zones,
         name='Labels',
-        style_function=lambda x: {'color': 'transparent','fillColor': 'transparent','weight': 0},
+        style_function=lambda x: {'color': 'transparent', 'fillColor': 'transparent', 
+            'weight': 0},
         tooltip=folium.features.GeoJsonTooltip(fields=['ZIPCODE','AAWDT'],
-        aliases = ['Zipcode', 'Traffic Count'],
+        aliases=['Zipcode', 'Traffic Count'],
         labels=True,
         sticky=False)
                       ).add_to(m)
 
-    #Show map
+    # Show map
     m
-    
+
     return m
+
 
 def get_agg_year():
     year_list = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     agg_year_data = gpd.GeoDataFrame()
     for year in year_list:
-        agg_year_data = agg_year_data.append(get_gdf(year))  
+        agg_year_data = agg_year_data.append(get_gdf(year))
     return agg_year_data
 
+
 def plot_traffic_data_over_time():
-    '''Function that plots all Seattle traffic data by zipcode over the time period 2007-2018.'''
-    
+    '''Function that plots all Seattle traffic data by
+    zipcode over the time period 2007-2018.'''
+
     print('Function takes a moment to run. Please wait.')
-    
+
     # Aggregate all traffic data by year
     agg_year_data = get_agg_year()
-    
+
     # Download zip bounds
     zip_bounds = get_zipcode_bounds()
     # Set aggregated year data to zip bound coordinate system
     agg_year_data.crs = zip_bounds.crs
-    # Spatial join the aggregated traffic data with the zip codes to get zipcode for each street points
+    # Spatial join the aggregated traffic data with the
+    # zip codes to get zipcode for each street points
     city_by_zip = gpd.sjoin(zip_bounds, agg_year_data, op='intersects')
-    city_by_zip.reset_index(inplace = True)
+    city_by_zip.reset_index(inplace=True)
     # Select only the necessary columns
-    city_by_zip = city_by_zip[['GEOBASID','ZIPCODE', 'YEAR', 'AAWDT', 'geometry']]
-    # Dissolve data by zipcode and year to aggregate data within geographic area
+    city_by_zip = city_by_zip[['GEOBASID', 
+        'ZIPCODE', 'YEAR', 'AAWDT', 'geometry']]
+    # Dissolve data by zipcode and year to
+    # aggregate data within geographic area
     # and keep year info.
-    zips_years = city_by_zip.dissolve(by=['YEAR','ZIPCODE'], aggfunc=sum)
+    zips_years = city_by_zip.dissolve(by=['YEAR', 'ZIPCODE'], aggfunc=sum)
     zips_years.reset_index(inplace=True)
-    
+
     # TimeSliderChoropleth example found here:
     # https://www.analyticsvidhya.com/blog/2020/06/guide-geospatial-analysis-folium-python/
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
-    zips_years['ModifiedDateTime'] = pd.Series(pd.to_numeric(zips_years['YEAR'], errors='coerce'), dtype='int64')
+    zips_years['ModifiedDateTime'] = pd.Series(pd.to_numeric(zips_years['YEAR'], \
+        errors='coerce'), dtype='int64')
     zips_years.ModifiedDateTime.fillna(0)
     zips_years['ModifiedDateTime'] = zips_years['ModifiedDateTime']*1e4+101
-    zips_years['ModifiedDateTime'] = pd.to_datetime(zips_years['ModifiedDateTime'].astype('int64').astype('str'))
+    zips_years['ModifiedDateTime'] = pd.to_datetime\
+    (zips_years['ModifiedDateTime'].astype('int64').astype('str'))
     # Convert traffic data from strings to numbers
     zips_years['AAWDT'] = zips_years['AAWDT'].astype(int)
     # Create bins for choropleth scale
     bins=np.linspace(min(zips_years['AAWDT']),max(zips_years['AAWDT']),11)
     # Create color column for AAWDT data based on RdYlBu_r hex keys
-    zips_years['color'] = zips_years['AAWDT']=pd.cut(zips_years['AAWDT'],bins,labels=['#313695',\
-        '4575b4','#74add1','#abd9e9','#e0f3f8','#ffffbf','#fee090',\
-        '#fdae61','#f46d43','a50026'],include_lowest=True)
+    zips_years['color'] = zips_years['AAWDT']=pd.cut(zips_years['AAWDT'], \
+        bins,labels=['#313695', '4575b4','#74add1','#abd9e9',
+        '#e0f3f8','#ffffbf','#fee090',\
+        '#fdae61','#f46d43','a50026'], include_lowest=True)
     # Select relevant columns
     zips_years = zips_years[['ModifiedDateTime', 'ZIPCODE', 'AAWDT', 'color', 'geometry']]
     # Convert time to ms format needed for TimeSliderChoropleth
-    zips_years['ModifiedDateTime']=(zips_years['ModifiedDateTime'].astype(int)// 10**9).astype('U10')
+    zips_years['ModifiedDateTime'] = \
+    (zips_years['ModifiedDateTime'].astype(int)// 10**9).astype('U10')
     # Make zipcodes a str for the map
     zips_years['ZIPCODE'] = zips_years['ZIPCODE'].astype(str)
     # Create a style dictionary for the map
@@ -224,7 +234,7 @@ def plot_traffic_data_over_time():
         traffic_dict[i]={}
         for j in zips_years[zips_years['ZIPCODE']==i].set_index(['ZIPCODE']).values:   
             traffic_dict[i][j[0]]={'color':j[1],'opacity':0.8}
-    
+
     m2 = folium.Map([47.65, -122.3], tiles='cartodbpositron', zoom_start=10)
 
     g = TimeSliderChoropleth(
