@@ -1,15 +1,10 @@
----
-layout: home
-title: Home
-weight: 0
-collection: sarah-web
----
-
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/Greening-Seattle/Visualization/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
+<iframe src="choropleth_v3.html" title="Seattle Traffic Data 2015"></iframe>
 
 ### Markdown
 
