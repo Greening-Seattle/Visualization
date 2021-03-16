@@ -24,7 +24,7 @@ Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Te
 - Function: Map predicted traffic/emissions reductions based on our predictive model
 - Results: A Map of predictions that can be varied with time
 
-### 3. Visualize the model traning process and the neural network:
+### 3. Visualize the model training process and the neural network:
 Visualize the Traning Process of Machine Learning Model from Tensorboard 
 
 - User: Policy makers  or researchers who train an neural network for prediction
