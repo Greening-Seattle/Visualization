@@ -79,8 +79,8 @@ def get_census_bounds():
     census_bounds_cleaned = census_bounds.loc[:, census_columns]
     # We change the cenus tract name to an integer for manipulation later.
     census_bounds_cleaned['NAME10'] = \
-                          census_bounds_cleaned['NAME10'
-                         ].astype(float)
+        census_bounds_cleaned['NAME10'
+        ].astype(float)
     return census_bounds_cleaned
 
 
@@ -160,17 +160,15 @@ def plot_zip_traffic_data(year):
 
     # Convert points to GeoJson
     folium.features.GeoJson(traffic_zones,
-        name='Labels', style_function=lambda x:
-                      {'color': 'transparent',
-                       'fillColor': 'transparent',
-                       'weight': 0},
-        tooltip=folium.features.GeoJsonTooltip(
-                                                fields=['ZIPCODE', 'AAWDT'],
-                                                aliases=['Zipcode',
-                                                         'Traffic Count'],
-                                                labels=True,
-                                                sticky=False)
-                                               ).add_to(m)
+                            name='Labels',
+                            style_function=lambda x:{'color': 'transparent',
+                                                     'fillColor': 'transparent',
+                                                     'weight': 0},
+                            tooltip=folium.features.GeoJsonTooltip(
+                                    fields=['ZIPCODE', 'AAWDT'],
+                                    aliases=['Zipcode', 'Traffic Count'],
+                                    labels=True,
+                                    sticky=False)).add_to(m)
 
     # Show map
     m
@@ -235,15 +233,15 @@ def plot_traffic_data_over_time():
                   '#e0f3f8', '#ffffbf', '#fee090',
                   '#fdae61', '#f46d43', 'a50026']
     zips_years['color'] = zips_years['AAWDT'] = 
-                                              pd.cut(zips_years['AAWDT'], 
-                                                     bins, labels=[color_list],
-                                                     include_lowest=True)
+                                              pd.cut(zips_years['AAWDT'],
+                                                    bins, labels=[color_list],
+                                                    include_lowest=True)
     # Select relevant columns
     zips_years = zips_years[['ModifiedDateTime',
       'ZIPCODE', 'AAWDT', 'color', 'geometry']]
     # Convert time to ms format needed for TimeSliderChoropleth
-    zips_years['ModifiedDateTime'] = \
-      (zips_years['ModifiedDateTime'].astype(int) // 10**9).astype('U10')
+    zips_years['ModifiedDateTime'] = (
+            zips_years['ModifiedDateTime'].astype(int) // 10**9).astype('U10')
     # Make zipcodes a str for the map
     zips_years['ZIPCODE'] = zips_years['ZIPCODE'].astype(str)
     # Create a style dictionary for the map
