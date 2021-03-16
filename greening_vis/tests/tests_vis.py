@@ -1,4 +1,21 @@
 import numpy as np
+import geopandas as gpd
+
+
+url_list = [
+ 'https://opendata.arcgis.com/datasets/7015d5d46a284f94ac05c2ea4358bcd7_0.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/5fc63b2a48474100b560a7d98b5097d7_1.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/27af9a2485c5442bb061fa7e881d7022_2.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/4f62515558174f53979b3be0335004d3_3.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/29f801d03c9b4b608bca6a8e497278c3_4.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/a0019dd0d6464747a88921f5e103d509_5.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/40bcfbc4054549ebba8b5777bbdd40ff_6.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/16cedd233d914118a275c6510115d466_7.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/902fd604ecf54adf8579894508cacc68_8.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/170b764c52f34c9497720c0463f3b58b_9.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/2c37babc94d64bbb938a9b520bc5538c_10.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/a35aa9249110472ba2c69cc574eff984_11.geojson']  # noqa: E501
+
 
 def get_gdf(year):
     '''Enter the desired year to download the traffic flow count
