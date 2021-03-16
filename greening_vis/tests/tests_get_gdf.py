@@ -1,10 +1,12 @@
-import plotting_functions
 from plotting_functions import get_gdf
+
+gdf_year = get_gdf(year)
+
 
 def year_type(year):
     """
     This function checks that the
-    year type is an integer 
+    year type is an integer
     """
     if isinstance(year, int):
         print('Year is an Integer')
@@ -12,17 +14,16 @@ def year_type(year):
         raise Exception('TypeError', 'Year input is not an integer')
     return
 
-def year_check (year):
+
+def year_check(year):
     """
-    Checks that the user has correctly 
-    input a year in the dataset from 11 
+    Checks that the user has correctly
+    input a year in the dataset from 11
     to 18 for the corresponding years
     """
-    if  11 <= year_input <= 18:
+    if 11 <= year <= 18:
         print('Valid Year Input')
     else:
         raise Exception('ValueError', 'gdf_year input not between 7 and 18')
     return
-    
 
-    

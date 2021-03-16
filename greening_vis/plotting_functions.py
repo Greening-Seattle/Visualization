@@ -79,8 +79,7 @@ def get_census_bounds():
     census_bounds_cleaned = census_bounds.loc[:, census_columns]
     # We change the cenus tract name to an integer for manipulation later.
     census_bounds_cleaned['NAME10'] = \
-        census_bounds_cleaned['NAME10'
-        ].astype(float)
+        census_bounds_cleaned['NAME10'].astype(float)
     return census_bounds_cleaned
 
 
@@ -161,9 +160,11 @@ def plot_zip_traffic_data(year):
     # Convert points to GeoJson
     folium.features.GeoJson(traffic_zones,
                             name='Labels',
-                            style_function=lambda x:{'color': 'transparent',
-                                                     'fillColor': 'transparent',
-                                                     'weight': 0},
+                            style_function=lambda x: {
+                                    'color': 'transparent',
+                                    'fillColor': 'transparent',
+                                    'weight': 0
+                                    },
                             tooltip=folium.features.GeoJsonTooltip(
                                     fields=['ZIPCODE', 'AAWDT'],
                                     aliases=['Zipcode', 'Traffic Count'],
@@ -214,16 +215,15 @@ def plot_traffic_data_over_time():
     # https://www.analyticsvidhya.com/blog/2020/06/guide-geospatial-analysis-folium-python/
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
-    zips_years['ModifiedDateTime'] = \
-                                   pd.Series(
-                                             pd.to_numeric(zips_years['YEAR'],
-                                                           errors='coerce'),
-                                                           dtype='int64')
+    zips_years['ModifiedDateTime'] = pd.Series(
+            pd.to_numeric(zips_years['YEAR'], errors='coerce'),
+                                              dtype='int64'
+                                              )
     zips_years.ModifiedDateTime.fillna(0)
     zips_years['ModifiedDateTime'] = zips_years['ModifiedDateTime']*1e4+101
-    zips_years['ModifiedDateTime'] = \
-        pd.to_datetime(zips_years['ModifiedDateTime'].astype('int64'
-        ).astype('str'))
+    zips_years['ModifiedDateTime'] = pd.to_datetime(
+            zips_years['ModifiedDateTime'].astype('int64').astype('str')
+            )
     # Convert traffic data from strings to numbers
     zips_years['AAWDT'] = zips_years['AAWDT'].astype(int)
     # Create bins for choropleth scale
@@ -248,8 +248,9 @@ def plot_traffic_data_over_time():
     traffic_dict = {}
     for i in zips_years['ZIPCODE'].unique():
         traffic_dict[i] = {}
-        for j in zips_years[zips_years['ZIPCODE'] == 
-              i].set_index(['ZIPCODE']).values:
+        for j in zips_years[
+                zips_years['ZIPCODE'] == i
+                ].set_index(['ZIPCODE']).values:
             traffic_dict[i][j[0]] = {'color': j[1], 'opacity': 0.8}
 
     m2 = folium.Map([47.65, -122.3], tiles='cartodbpositron', zoom_start=10)
