@@ -1,4 +1,6 @@
 name: python-gis
+# environment found at 
+# https://github.com/Automating-GIS-processes/site/blob/master/ci/py38-GIS.yaml
 channels:
   - patrikhlobil
   - conda-forge
