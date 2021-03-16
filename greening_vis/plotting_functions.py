@@ -34,10 +34,10 @@ def get_gdf(year):
     if year == 12:
         gdf_year = gdf_year.rename(columns={'STDY_YEAR': 'YEAR'})
     if year == 15 or year == 16:
-        gdf_year = gdf_year.rename(columns={"COUNTAAWDT": 'AAWDT', 
-                            "FLOWSEGID": "GEOBASID", 'FIRST_STNAME_ORD': 'STNAME'})
+        gdf_year = gdf_year.rename(columns={"COUNTAAWDT": 'AAWDT',
+          "FLOWSEGID": "GEOBASID", 'FIRST_STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID', 'STNAME',
-            'SHAPE_Length', 'geometry']]
+          'SHAPE_Length', 'geometry']]
         if year == 15:
             year_list = [2015]*len(gdf_year)
             gdf_year['YEAR'] = year_list
@@ -45,10 +45,10 @@ def get_gdf(year):
             year_list = [2016]*len(gdf_year)
             gdf_year['YEAR'] = year_list
     elif year == 17 or year == 18:
-        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', "FLOWSEGID": 
-            "GEOBASID", 'STNAME_ORD': 'STNAME'})
-        gdf_year = gdf_year[['AAWDT', 'GEOBASID', 
-            'STNAME', 'SHAPE_Length', 'geometry']]
+        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', "FLOWSEGID":
+          "GEOBASID", 'STNAME_ORD': 'STNAME'})
+        gdf_year = gdf_year[['AAWDT', 'GEOBASID',
+          'STNAME', 'SHAPE_Length', 'geometry']]
         if year == 17:
             year_list = [2017]*len(gdf_year)
             gdf_year['YEAR'] = year_list
@@ -56,8 +56,8 @@ def get_gdf(year):
             year_list = [2018]*len(gdf_year)
             gdf_year['YEAR'] = year_list
     # This cleans the output to contain only relevant columns.
-    gdf_year = gdf_year[['YEAR', 'AAWDT', 'GEOBASID', 
-        'STNAME', 'SHAPE_Length', 'geometry']]
+    gdf_year = gdf_year[['YEAR', 'AAWDT', 'GEOBASID',
+      'STNAME', 'SHAPE_Length', 'geometry']]
     # This removes any null values from the dataset.
     gdf_year = gdf_year[gdf_year.YEAR != 0]
     gdf_year = gdf_year[gdf_year.YEAR.notnull()]
@@ -65,7 +65,7 @@ def get_gdf(year):
 
 
 def get_census_bounds():
-    ''' Downloads boundaries of census tracts for the city of Seattle. 
+    ''' Downloads boundaries of census tracts for the city of Seattle.
     Data comes from Seattle's open GIS data.'''
     # First, we download the data from Seattle's open GIS.
     url = 'https://opendata.arcgis.com/datasets/de58dc3e1efc49b782ab357e044ea20c_9.geojson'
@@ -130,7 +130,7 @@ def plot_zip_traffic_data(year):
     # Stackoverflow question that helped create the tooltips:
     # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium
     # Create a Map instance
-    m = folium.Map(location=[47.65, -122.3], tiles='cartodbpositron', 
+    m = folium.Map(location=[47.65, -122.3], tiles='cartodbpositron',
         zoom_start=10, control_scale=True)
 
     # Plot a choropleth map
@@ -154,9 +154,10 @@ def plot_zip_traffic_data(year):
     # Convert points to GeoJson
     folium.features.GeoJson(traffic_zones,
         name='Labels',
-        style_function=lambda x: {'color': 'transparent', 'fillColor': 'transparent', 
+        style_function=lambda x: \
+        {'color': 'transparent', 'fillColor': 'transparent',
             'weight': 0},
-        tooltip=folium.features.GeoJsonTooltip(fields=['ZIPCODE','AAWDT'],
+        tooltip=folium.features.GeoJsonTooltip(fields=['ZIPCODE', 'AAWDT'],
         aliases=['Zipcode', 'Traffic Count'],
         labels=True,
         sticky=False)
@@ -194,7 +195,7 @@ def plot_traffic_data_over_time():
     city_by_zip = gpd.sjoin(zip_bounds, agg_year_data, op='intersects')
     city_by_zip.reset_index(inplace=True)
     # Select only the necessary columns
-    city_by_zip = city_by_zip[['GEOBASID', 
+    city_by_zip = city_by_zip[['GEOBASID',
         'ZIPCODE', 'YEAR', 'AAWDT', 'geometry']]
     # Dissolve data by zipcode and year to
     # aggregate data within geographic area
@@ -206,34 +207,37 @@ def plot_traffic_data_over_time():
     # https://www.analyticsvidhya.com/blog/2020/06/guide-geospatial-analysis-folium-python/
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
-    zips_years['ModifiedDateTime'] = pd.Series(pd.to_numeric(zips_years['YEAR'], \
+    zips_years['ModifiedDateTime'] = \
+    pd.Series(pd.to_numeric(zips_years['YEAR'],
         errors='coerce'), dtype='int64')
     zips_years.ModifiedDateTime.fillna(0)
     zips_years['ModifiedDateTime'] = zips_years['ModifiedDateTime']*1e4+101
     zips_years['ModifiedDateTime'] = pd.to_datetime\
-    (zips_years['ModifiedDateTime'].astype('int64').astype('str'))
+   (zips_years['ModifiedDateTime'].astype('int64').astype('str'))
     # Convert traffic data from strings to numbers
     zips_years['AAWDT'] = zips_years['AAWDT'].astype(int)
     # Create bins for choropleth scale
-    bins=np.linspace(min(zips_years['AAWDT']),max(zips_years['AAWDT']),11)
+    bins = np.linspace(min(zips_years['AAWDT']), max(zips_years['AAWDT']), 11)
     # Create color column for AAWDT data based on RdYlBu_r hex keys
-    zips_years['color'] = zips_years['AAWDT']=pd.cut(zips_years['AAWDT'], \
-        bins,labels=['#313695', '4575b4','#74add1','#abd9e9',
-        '#e0f3f8','#ffffbf','#fee090',\
-        '#fdae61','#f46d43','a50026'], include_lowest=True)
+    zips_years['color'] = zips_years['AAWDT'] = pd.cut(zips_years['AAWDT'],
+        bins, labels=['#313695', '4575b4', '#74add1', '#abd9e9',
+          '#e0f3f8', '#ffffbf', '#fee090',
+          '#fdae61', '#f46d43', 'a50026'], include_lowest=True)
     # Select relevant columns
-    zips_years = zips_years[['ModifiedDateTime', 'ZIPCODE', 'AAWDT', 'color', 'geometry']]
+    zips_years = zips_years[['ModifiedDateTime',
+      'ZIPCODE', 'AAWDT', 'color', 'geometry']]
     # Convert time to ms format needed for TimeSliderChoropleth
     zips_years['ModifiedDateTime'] = \
-    (zips_years['ModifiedDateTime'].astype(int)// 10**9).astype('U10')
+      (zips_years['ModifiedDateTime'].astype(int) // 10**9).astype('U10')
     # Make zipcodes a str for the map
     zips_years['ZIPCODE'] = zips_years['ZIPCODE'].astype(str)
     # Create a style dictionary for the map
-    traffic_dict={}
+    traffic_dict = {}
     for i in zips_years['ZIPCODE'].unique():
-        traffic_dict[i]={}
-        for j in zips_years[zips_years['ZIPCODE']==i].set_index(['ZIPCODE']).values:   
-            traffic_dict[i][j[0]]={'color':j[1],'opacity':0.8}
+        traffic_dict[i] = {}
+        for j in zips_years[zips_years['ZIPCODE'] == 
+              i].set_index(['ZIPCODE']).values:
+            traffic_dict[i][j[0]] = {'color': j[1], 'opacity': 0.8}
 
     m2 = folium.Map([47.65, -122.3], tiles='cartodbpositron', zoom_start=10)
 
@@ -243,11 +247,3 @@ def plot_traffic_data_over_time():
     ).add_to(m2)
 
     return m2
-    
-    
-    
-    
-        
-
-
-    
