@@ -52,7 +52,9 @@ Visualize the Traning Process of Machine Learning Model from Tensorboard
 
 - visualization/ contains plotting function to express traffic data as an interactive Chlorpleth Map in follium
 
-- map_html Several example versions of chloropleth maps  
+- map_html Several example versions of chloropleth maps
+
+- Model Visualization/ Framework for Dense Neural Network visualization based on a sample electric car dataset. This publicly available data can be used to set up visualization in Tensor Board, while the data is being cleaned. This Model was then adapted to the actual training data set.   
 
 ## Links to Key Visualization:
 
