@@ -150,17 +150,21 @@ def plot_zip_traffic_data(year):
     m
     
     return m
-    
+
+def get_agg_year():
+    year_list = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+    agg_year_data = gpd.GeoDataFrame()
+    for year in year_list:
+        agg_year_data = agg_year_data.append(get_gdf(year))  
+    return agg_year_data
+
 def plot_traffic_data_over_time():
     '''Function that plots all Seattle traffic data by zipcode over the time period 2007-2018.'''
     
     print('Function takes a moment to run. Please wait.')
     
     # Aggregate all traffic data by year
-    year_list = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
-    agg_year_data = gpd.GeoDataFrame()
-    for year in year_list:
-        agg_year_data = agg_year_data.append(get_gdf(year))
+    agg_year_data = get_agg_year()
     
     # Download zip bounds
     zip_bounds = get_zipcode_bounds()
