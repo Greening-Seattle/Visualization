@@ -12,8 +12,8 @@ def test_plot_zip_traffic_data(year):
     gdf_year = get_gdf(year)
     year_test = gdf_year['YEAR'].unique().astype(int)[0]
 
-    assert year_dict.get(year) == year_test, 
-        'Function downloaded incorrect year data'
+    assert year_dict.get(year) == year_test,
+    'Function downloaded incorrect year data'
     return
 
 
@@ -22,5 +22,5 @@ def test_plot_traffic_data_over_time():
     year_expect = np.array(range(2007, 2019))
     year_prod = agg_year_data['YEAR'].unique()
     assert np.array_equal(year_prod, year_expect),
-        'Aggregation of data by year did not occur correctly'
+    'Aggregation of data by year did not occur correctly'
     return

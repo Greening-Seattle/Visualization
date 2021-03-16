@@ -232,8 +232,8 @@ def plot_traffic_data_over_time():
     color_list = ['#313695', '4575b4', '#74add1', '#abd9e9',
                   '#e0f3f8', '#ffffbf', '#fee090',
                   '#fdae61', '#f46d43', 'a50026']
-    zips_years['color'] = zips_years['AAWDT']=pd.cut(
-            zips_years['AAWDT'], bins, labels=[color_list],include_lowest=True
+    zips_years['color'] = pd.cut(
+            zips_years['AAWDT'], bins, labels=[color_list], include_lowest=True
             )
     # Select relevant columns
     zips_years = zips_years[['ModifiedDateTime',
