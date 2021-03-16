@@ -77,7 +77,7 @@ Example of Demo Interactive Chloropleth Map:
 
 - map_html Several example versions of chloropleth maps
 
-- Model Visualization/ Framework for Dense Neural Network visualization based on a sample electric car dataset. This publicly available data can be used to set up visualization in Tensor Board, while the data is being cleaned. This Model was then adapted to the actual training data set.   
+- Model Visualization/ Frameworks for training a neural network for prediction and visualizing the training process. It also include the module to exporting the tensorflow-formated model to the Numpy-formated model.   
 
 ## Repository Architecture:
 
