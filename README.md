@@ -46,6 +46,14 @@ Visualize the Traning Process of Machine Learning Model from Tensorboard
 
 - The process for data cleaning can be viewed on the Shared Repository and Prediction Repository for the Greening Seattle Organization. 
 
+- tests/ contains unit tests for key functions within the repository, as well as for continuous integtration with Travis.
+
+- source/ contains sketch jupyter notebook that provide helpful examples for users in working with the Geographic data.
+
+- visualization/ contains plotting function to express traffic data as an interactive Chlorpleth Map in follium
+
+- map_html Several example versions of chloropleth maps  
+
 ## Links to Key Visualization:
 
 [Use case graphic](brendanbutler.github.com/Greening-Seattle/Prediction/img/Slide1.jpg)
