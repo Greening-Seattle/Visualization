@@ -36,6 +36,15 @@ Visualize the Traning Process of Machine Learning Model from Tensorboard
 
 - Results: Tensorboard for visualzing the training process, the neural network for prediction. After the prediction group trains the model and predicts traffic flow the visualization team will contextualize these model outputs.
 
+
+### Visual Examples of Key Results:
+
+Example of Demo Interactive Chloropleth Map:
+
+![Demo Seattle Map](https://github.com/Greening-Seattle/Visualization/blob/main/map_html/demo_map.PNG)
+
+
+
 ## Key files within the Repository:
 
 - Chloropleth Map: A map of Seattle traffic flow for 2015 which has a color scale for traffic volume plotted against different census tracks.
@@ -78,6 +87,7 @@ Visualize the Traning Process of Machine Learning Model from Tensorboard
 |   |   __init__.py
 |   |   plotting_functions.py
 +---map_html
+|   |   Demo Map
 |   |   choropleth_map.html
 |   |   choropleth_mapv2.html
 |   |   choropleth_mapv3.html
