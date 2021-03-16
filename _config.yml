@@ -1,9 +1,1 @@
-# Site settings
-title: Greening Seattle Data Visualizations
-url: "https://greening-seattle.github.io/Visualization/"
-github_username:  Greening-Seattle
 
-# Build settings
-markdown: kramdown
-
-theme: jekyll-theme-cayman
