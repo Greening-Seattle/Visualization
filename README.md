@@ -30,7 +30,7 @@ Visualize Machine Learning Model Outputs from the Greening Seattle Prediction Te
 ### 3. Framework for Visualizing the training of neural network for prediction:
 Visualize the Traning Process of Machine Learning Model from Tensorboard 
 
-- User: Policy makers  or researchers who train an neural network for prediction
+- User: Policy makers or researchers who train an neural network for prediction
 
 - Function: Train a neural network for predicting the traffic data based on the input features
 
