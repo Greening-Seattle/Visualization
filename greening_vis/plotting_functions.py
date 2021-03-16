@@ -35,9 +35,10 @@ def get_gdf(year):
         gdf_year = gdf_year.rename(columns={'STDY_YEAR': 'YEAR'})
     if year == 15 or year == 16:
         gdf_year = gdf_year.rename(columns={"COUNTAAWDT": 'AAWDT',
-          "FLOWSEGID": "GEOBASID", 'FIRST_STNAME_ORD': 'STNAME'})
+                                            "FLOWSEGID": "GEOBASID", 
+                                            'FIRST_STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID', 'STNAME',
-          'SHAPE_Length', 'geometry']]
+                             'SHAPE_Length', 'geometry']]
         if year == 15:
             year_list = [2015]*len(gdf_year)
             gdf_year['YEAR'] = year_list
@@ -45,10 +46,12 @@ def get_gdf(year):
             year_list = [2016]*len(gdf_year)
             gdf_year['YEAR'] = year_list
     elif year == 17 or year == 18:
-        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', "FLOWSEGID":
-          "GEOBASID", 'STNAME_ORD': 'STNAME'})
+        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', 
+                                            "FLOWSEGID": "GEOBASID", 
+                                            'STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID',
-          'STNAME', 'SHAPE_Length', 'geometry']]
+                             'STNAME', 'SHAPE_Length',
+                             'geometry']]
         if year == 17:
             year_list = [2017]*len(gdf_year)
             gdf_year['YEAR'] = year_list
@@ -57,7 +60,8 @@ def get_gdf(year):
             gdf_year['YEAR'] = year_list
     # This cleans the output to contain only relevant columns.
     gdf_year = gdf_year[['YEAR', 'AAWDT', 'GEOBASID',
-      'STNAME', 'SHAPE_Length', 'geometry']]
+                         'STNAME', 'SHAPE_Length', 
+                         'geometry']]
     # This removes any null values from the dataset.
     gdf_year = gdf_year[gdf_year.YEAR != 0]
     gdf_year = gdf_year[gdf_year.YEAR.notnull()]
@@ -75,7 +79,8 @@ def get_census_bounds():
     census_bounds_cleaned = census_bounds.loc[:, census_columns]
     # We change the cenus tract name to an integer for manipulation later.
     census_bounds_cleaned['NAME10'] = \
-        census_bounds_cleaned['NAME10'].astype(float)
+                                      census_bounds_cleaned['NAME10'
+                                      ].astype(float)
     return census_bounds_cleaned
 
 
@@ -155,15 +160,17 @@ def plot_zip_traffic_data(year):
     folium.features.GeoJson(traffic_zones,
         name='Labels',
         style_function=lambda x: \
-        {'color': 'transparent', 'fillColor': 'transparent',
-            'weight': 0},
+                                  {'color': 'transparent', 
+                                   'fillColor': 'transparent',
+                                   'weight': 0},
         tooltip=folium.features.GeoJsonTooltip(fields=['ZIPCODE', 'AAWDT'],
-        aliases=['Zipcode', 'Traffic Count'],
-        labels=True,
-        sticky=False)
-                      ).add_to(m)
+                                               aliases=['Zipcode', 
+                                                        'Traffic Count'],
+                                               labels=True,
+                                               sticky=False)
+                                                             ).add_to(m)
 
-    # Show map
+        # Show map
     m
 
     return m
@@ -212,8 +219,9 @@ def plot_traffic_data_over_time():
         errors='coerce'), dtype='int64')
     zips_years.ModifiedDateTime.fillna(0)
     zips_years['ModifiedDateTime'] = zips_years['ModifiedDateTime']*1e4+101
-    zips_years['ModifiedDateTime'] = pd.to_datetime\
-   (zips_years['ModifiedDateTime'].astype('int64').astype('str'))
+    zips_years['ModifiedDateTime'] = \
+        pd.to_datetime(zips_years['ModifiedDateTime'].astype('int64'
+        ).astype('str'))
     # Convert traffic data from strings to numbers
     zips_years['AAWDT'] = zips_years['AAWDT'].astype(int)
     # Create bins for choropleth scale
