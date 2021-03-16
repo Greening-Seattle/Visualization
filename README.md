@@ -43,6 +43,9 @@ Example of Demo Interactive Chloropleth Map:
 
 ![Demo Seattle Map](https://github.com/Greening-Seattle/Visualization/blob/main/map_html/demo_map.PNG)
 
+-Example of breaking down geographic data by specific areas, here University District Census Tracts:
+
+![University Census Tract](https://github.com/Greening-Seattle/Visualization/blob/main/map_html/U%20District%20Area%20Chloropleth%20Plot.PNG)
 
 
 ## Key files within the Repository:
@@ -87,10 +90,11 @@ Example of Demo Interactive Chloropleth Map:
 |   |   __init__.py
 |   |   plotting_functions.py
 +---map_html
-|   |   Demo Map
+|   |   U District Area Chloropleth Plot.PNG
 |   |   choropleth_map.html
 |   |   choropleth_mapv2.html
 |   |   choropleth_mapv3.html
+|   |   demo_map.PNG
 +---source
 |   |    Map building.ipynb
 |   |    Mapping_function_test.ipynb
