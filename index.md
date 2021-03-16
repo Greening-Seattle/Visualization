@@ -4,7 +4,7 @@ You can use the [editor on GitHub](https://github.com/Greening-Seattle/Visualiza
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-<iframe src="https://github.com/Greening-Seattle/Visualization/blob/main/choropleth_map_v3.html" title="Seattle Traffic Data 2015"></iframe>
+<embed type="text/html" src="https://github.com/Greening-Seattle/Visualization/blob/main/choropleth_map_v3.html" width="500" height="200">
 
 ### Markdown
 
