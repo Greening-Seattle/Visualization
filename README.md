@@ -6,7 +6,7 @@ The goal of this project is traffic visualization for the city of Seattle. There
 
 - Zip codes were chosen as the geographic level to examine because it exists as an intermediate level, minimizing the tradeoff between minimal features in smaller regions and inability to see broader trends in the data sets with  city-wide view. 
  
-- The primary intended users are Seattle Residents or local officials who want to understand and predict the effects of population growth and local transit infrastructure on traffic flow.[Use case graphic](brendanbutler.github.com/Greening-Seattle/Prediction/img/Slide1.jpg)
+- The primary intended users are Seattle Residents or local officials who want to understand and predict the effects of population growth and local transit infrastructure on traffic flow.
 
 
 ## Visualization Use Cases:
@@ -49,6 +49,12 @@ Example of Demo Interactive Chloropleth Map:
 -Example of breaking down geographic data by specific areas, here University District Census Tracts:
 
 ![University Census Tract](https://github.com/Greening-Seattle/Visualization/blob/main/map_html/U%20District%20Area%20Chloropleth%20Plot.PNG)
+
+-Example of Visualizing Dense Neural Network Outputs: 
+
+-This is an example of the Visualization Team taking the output of the machine learning model developed by the prediction team.
+
+![ML Traffic Visualization](https://github.com/Greening-Seattle/Visualization/blob/main/map_html/Change%20in%20traffic%20with%202.5%20population%20change.PNG) 
 
 
 ## Key files within the Repository:
@@ -102,6 +108,7 @@ Example of Demo Interactive Chloropleth Map:
 |   |    Map building.ipynb
 |   |    Mapping_function_test.ipynb
 |   |    SG Tests_get gdf.ipynb
+|   |    Change in traffic with 2.5 population change.PNG
 ```
 
 ## Code References
