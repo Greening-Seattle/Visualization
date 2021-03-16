@@ -3,18 +3,18 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 url_list = [
- 'https://opendata.arcgis.com/datasets/7015d5d46a284f94ac05c2ea4358bcd7_0.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/5fc63b2a48474100b560a7d98b5097d7_1.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/27af9a2485c5442bb061fa7e881d7022_2.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/4f62515558174f53979b3be0335004d3_3.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/29f801d03c9b4b608bca6a8e497278c3_4.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/a0019dd0d6464747a88921f5e103d509_5.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/40bcfbc4054549ebba8b5777bbdd40ff_6.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/16cedd233d914118a275c6510115d466_7.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/902fd604ecf54adf8579894508cacc68_8.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/170b764c52f34c9497720c0463f3b58b_9.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/2c37babc94d64bbb938a9b520bc5538c_10.geojson',  # noqua: E501
- 'https://opendata.arcgis.com/datasets/a35aa9249110472ba2c69cc574eff984_11.geojson']  # noqua: E501
+ 'https://opendata.arcgis.com/datasets/7015d5d46a284f94ac05c2ea4358bcd7_0.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/5fc63b2a48474100b560a7d98b5097d7_1.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/27af9a2485c5442bb061fa7e881d7022_2.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/4f62515558174f53979b3be0335004d3_3.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/29f801d03c9b4b608bca6a8e497278c3_4.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/a0019dd0d6464747a88921f5e103d509_5.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/40bcfbc4054549ebba8b5777bbdd40ff_6.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/16cedd233d914118a275c6510115d466_7.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/902fd604ecf54adf8579894508cacc68_8.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/170b764c52f34c9497720c0463f3b58b_9.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/2c37babc94d64bbb938a9b520bc5538c_10.geojson',  # noqa: E501
+ 'https://opendata.arcgis.com/datasets/a35aa9249110472ba2c69cc574eff984_11.geojson']  # noqa: E501
 
 
 def get_gdf(year):
@@ -72,7 +72,7 @@ def get_census_bounds():
     ''' Downloads boundaries of census tracts for the city of Seattle.
     Data comes from Seattle's open GIS data.'''
     # First, we download the data from Seattle's open GIS.
-    url = 'https://opendata.arcgis.com/datasets/de58dc3e1efc49b782ab357e044ea20c_9.geojson'  # noqua: E501
+    url = 'https://opendata.arcgis.com/datasets/de58dc3e1efc49b782ab357e044ea20c_9.geojson'  # noqa: E501
     census_bounds = gpd.read_file(url)
     # We select only the relevant columns.
     census_columns = ['NAME10', 'SHAPE_Area', 'geometry']
@@ -87,7 +87,7 @@ def get_zipcode_bounds():
     ''' Downloads boundaries of zipcodes for the city of Seattle.
     Data comes from Seattle's open GIS data.'''
     # First, we download the data from Seattle's open GIS.
-    zipcodes_url = 'https://opendata.arcgis.com/datasets/83fc2e72903343aabff6de8cb445b81c_2.geojson'  # noqua: E501
+    zipcodes_url = 'https://opendata.arcgis.com/datasets/83fc2e72903343aabff6de8cb445b81c_2.geojson'  # noqa: E501
     zipcodes = gpd.read_file(zipcodes_url)
     # We select only the relevant columns and change the Zipcode
     # to an integer for manipulation later.
@@ -130,9 +130,9 @@ def plot_zip_traffic_data(year):
     traffic_zones_json = traffic_zones.to_json()
 
     # Folium tutorial that informed this code:
-    # https://autogis-site.readthedocs.io/en/latest/notebooks/L5/02_interactive-map-folium.html  # noqua: E501
+    # https://autogis-site.readthedocs.io/en/latest/notebooks/L5/02_interactive-map-folium.html  # noqa: E501
     # Stackoverflow question that helped create the tooltips:
-    # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium  # noqua: E501
+    # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium  # noqa: E501
     # Create a Map instance
     m = folium.Map(location=[47.65, -122.3],
                    tiles='cartodbpositron',
@@ -212,7 +212,7 @@ def plot_traffic_data_over_time():
     zips_years.reset_index(inplace=True)
 
     # TimeSliderChoropleth example found here:
-    # https://www.analyticsvidhya.com/blog/2020/06/guide-geospatial-analysis-folium-python/  # noqua: E501
+    # https://www.analyticsvidhya.com/blog/2020/06/guide-geospatial-analysis-folium-python/  # noqa: E501
     from folium.plugins import TimeSliderChoropleth
     # Convert time data from just year to year-month-day format
     zips_years['ModifiedDateTime'] = pd.Series(
