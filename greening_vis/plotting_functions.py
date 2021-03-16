@@ -35,7 +35,7 @@ def get_gdf(year):
         gdf_year = gdf_year.rename(columns={'STDY_YEAR': 'YEAR'})
     if year == 15 or year == 16:
         gdf_year = gdf_year.rename(columns={"COUNTAAWDT": 'AAWDT',
-                                            "FLOWSEGID": "GEOBASID", 
+                                            "FLOWSEGID": "GEOBASID",
                                             'FIRST_STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID', 'STNAME',
                              'SHAPE_Length', 'geometry']]
@@ -46,8 +46,8 @@ def get_gdf(year):
             year_list = [2016]*len(gdf_year)
             gdf_year['YEAR'] = year_list
     elif year == 17 or year == 18:
-        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT', 
-                                            "FLOWSEGID": "GEOBASID", 
+        gdf_year = gdf_year.rename(columns={"AWDT": 'AAWDT',
+                                            "FLOWSEGID": "GEOBASID",
                                             'STNAME_ORD': 'STNAME'})
         gdf_year = gdf_year[['AAWDT', 'GEOBASID',
                              'STNAME', 'SHAPE_Length',
@@ -60,7 +60,7 @@ def get_gdf(year):
             gdf_year['YEAR'] = year_list
     # This cleans the output to contain only relevant columns.
     gdf_year = gdf_year[['YEAR', 'AAWDT', 'GEOBASID',
-                         'STNAME', 'SHAPE_Length', 
+                         'STNAME', 'SHAPE_Length',
                          'geometry']]
     # This removes any null values from the dataset.
     gdf_year = gdf_year[gdf_year.YEAR != 0]
@@ -79,8 +79,8 @@ def get_census_bounds():
     census_bounds_cleaned = census_bounds.loc[:, census_columns]
     # We change the cenus tract name to an integer for manipulation later.
     census_bounds_cleaned['NAME10'] = \
-                                      census_bounds_cleaned['NAME10'
-                                      ].astype(float)
+                                    census_bounds_cleaned['NAME10'
+                                   ].astype(float)
     return census_bounds_cleaned
 
 
@@ -135,8 +135,10 @@ def plot_zip_traffic_data(year):
     # Stackoverflow question that helped create the tooltips:
     # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium
     # Create a Map instance
-    m = folium.Map(location=[47.65, -122.3], tiles='cartodbpositron',
-        zoom_start=10, control_scale=True)
+    m = folium.Map(location=[47.65, -122.3], \
+                                              tiles='cartodbpositron',
+                                              zoom_start=10,
+                                              control_scale=True)
 
     # Plot a choropleth map
     # Notice: 'geoid' column that we created earlier needs
@@ -158,12 +160,12 @@ def plot_zip_traffic_data(year):
 
     # Convert points to GeoJson
     folium.features.GeoJson(traffic_zones,
-        name='Labels',
-        style_function=lambda x: \
-                                  {'color': 'transparent', 
-                                   'fillColor': 'transparent',
-                                   'weight': 0},
-        tooltip=folium.features.GeoJsonTooltip(fields=['ZIPCODE', 'AAWDT'],
+        name='Labels', style_function=lambda x: \
+                                                {'color': 'transparent',
+                                                 'fillColor': 'transparent',
+                                                 'weight': 0},
+        tooltip=folium.features.GeoJsonTooltip(
+                                               fields=['ZIPCODE', 'AAWDT'],
                                                aliases=['Zipcode', 
                                                         'Traffic Count'],
                                                labels=True,
