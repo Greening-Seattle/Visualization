@@ -28,9 +28,11 @@ def plot_zip_traffic_data(year):
         '''Enter the desired year to download the traffic flow count
         data for that year. Example: enter '7' for the year 2007.
         '''
-
+        # Pulls the data from Seattle's open GIS.
         num = year-7
         gdf_year = gpd.read_file(url_list[num])
+        # There are some inconsistencies in the names of columns across years in this data, 
+        # so these conditional statements make everything the same.
         if year == 11:
             gdf_year = gdf_year.rename(columns={"YEAR_" : 'YEAR'})
             gdf_year = gdf_year[gdf_year.STNAME != '16TH AVE S']
@@ -54,46 +56,64 @@ def plot_zip_traffic_data(year):
             elif year == 18:
                 year_list = [2018]*len(gdf_year)
                 gdf_year['YEAR'] = year_list
+        # This cleans the output to contain only relevant columns.
         gdf_year = gdf_year[[ 'YEAR', 'AAWDT', 'GEOBASID', 'STNAME', 'SHAPE_Length', 'geometry']]
+        # This removes any null values from the dataset. 
         gdf_year = gdf_year[gdf_year.YEAR != 0]
         gdf_year = gdf_year[gdf_year.YEAR.notnull()]
         return gdf_year 
 
     def get_census_bounds():
+        ''' Downloads boundaries of census tracts for the city of Seattle. Data comes from Seattle's open GIS data.'''
+        # First, we download the data from Seattle's open GIS. 
         url = 'https://opendata.arcgis.com/datasets/de58dc3e1efc49b782ab357e044ea20c_9.geojson'
         census_bounds = gpd.read_file(url)
+        # We select only the relevant columns.
         census_columns = ['NAME10', 'SHAPE_Area', 'geometry']
         census_bounds_cleaned = census_bounds.loc[:,census_columns]
+        # We change the cenus tract name to an integer for manipulation later.
         census_bounds_cleaned['NAME10'] = census_bounds_cleaned['NAME10'].astype(float)
         return census_bounds_cleaned
 
 
     def get_zipcode_bounds():
+        ''' Downloads boundaries of zipcodes for the city of Seattle. Data comes from Seattle's open GIS data.'''
+        # First, we download the data from Seattle's open GIS.
         zipcodes_url = 'https://opendata.arcgis.com/datasets/83fc2e72903343aabff6de8cb445b81c_2.geojson'
         zipcodes = gpd.read_file(zipcodes_url)
-
+        # We select only the relevant columns and change the Zipcode to an integer for manipulation later.
         zipcodes_columns = ['ZIPCODE', 'SHAPE_Area', 'geometry']
         zipcodes_cleaned = zipcodes.loc[:,zipcodes_columns]
         zipcodes_cleaned['ZIPCODE'] = zipcodes_cleaned['ZIPCODE'].astype(int)
         zipcodes_cleaned.head()
-
+        # The zipcode dataset includes more than just the area of Seattle, so we join it 
+        # with the census bounds to get out only Seattle data. 
         census_bounds_cleaned = get_census_bounds()
         zips = gpd.sjoin(zipcodes_cleaned, census_bounds_cleaned, op='intersects')
         zips_columns = ['ZIPCODE', 'NAME10', 'SHAPE_Area_left', 'geometry']
         zips = zips[zips_columns]
-
+        # Finally, we dissolve the data by Zipcode to ensure one area for each zipcode.
         zips = zips.dissolve(by='ZIPCODE')
         return zips
     
+    # We need to download the zipcode data and the traffic data for the desired year. 
     zips = get_zipcode_bounds()
     gdf_year = get_gdf(year)
     
+    # A spatial join of the traffic data with the zipcodes assigns each street to its respective
+    # zip code. Then, we dissolve this data set by zipcode so that each zipcode is one row with 
+    # the cumulative traffic count associated with it. We also convert the data to a json for the 
+    # map feature.
     city_by_zip = gpd.sjoin(zips, gdf_year, op='intersects')
     traffic_zones = city_by_zip.dissolve(by='ZIPCODE', aggfunc = 'sum')
     traffic_zones.reset_index(inplace = True)
     traffic_zones = traffic_zones[['GEOBASID', 'AAWDT', 'ZIPCODE', 'geometry']]
     traffic_zones_json = traffic_zones.to_json()
     
+    # Folium tutorial that informed this code:
+    # https://autogis-site.readthedocs.io/en/latest/notebooks/L5/02_interactive-map-folium.html
+    # Stackoverflow question that helped create the tooltips: 
+    # https://stackoverflow.com/questions/55088688/how-do-you-add-geojsontooltip-to-folium-choropleth-class-in-folium
     # Create a Map instance
     m = folium.Map(location=[47.65, -122.3], tiles = 'cartodbpositron', zoom_start=10, control_scale=True)
 
